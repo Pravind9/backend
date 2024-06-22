@@ -46,6 +46,30 @@ const getPerson = async (request) => {
     }
 };
 
+const getLoggedInUsers = async (request) => {
+    console.log("get loggedIn user ", JSON.stringify(request.body));
+    
+    try {
+        return await new Promise(function (resolve, reject) {
+            pool.query("SELECT uid, dname, logged_in, status FROM public.fx_person", (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    console.log("row = ", result.rowCount);
+                    if (result && result.rowCount > 0) {
+                        resolve({ "record": result.rows, "status": "REC" })
+                    } else {
+                        resolve({ "record": result.rows, "status": "NOREC" })
+                    }
+                }
+            });
+        });
+
+    } catch (exception) {
+        console.error(exception);
+        throw new Error("Internal Server error");
+    }
+};
 
 const toggleLoginStatus = async (request) => {
     console.log("request Body :: toggleLoginStatus ", JSON.stringify(request.body));
@@ -130,5 +154,6 @@ module.exports = {
     getPerson,
     createPerson,
     createProfile,
-    toggleLoginStatus
+    toggleLoginStatus,
+    getLoggedInUsers
 }

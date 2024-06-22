@@ -6,7 +6,6 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 
 const pgdb = require("./postgresql/postgresqlModel");
-const mongoDb = require("./mongodb/mongoModel");
 const apis = require("./apis/resources");
 const { request } = require("http");
 const { error } = require("console");
@@ -24,7 +23,7 @@ app.use(
     })
 );
 
-app.set("view engine", "hbs");
+
 app.use(cors());
 app.use(express.static(publicDir));
 app.use(express.urlencoded({ extended: 'false' }))
@@ -67,6 +66,17 @@ app.post("/api/user/register", (req, res) => {
     }).catch(error => {
         console.log(error);
         response.status(500).send(error);
+    });
+});
+
+app.post("/api/user/logged", (req, res) => {
+    console.log("Get logged in user ", req.body);
+    pgdb.getLoggedInUsers(req).then(response => {
+        if(response.status === "REC"){
+            return res.status(201).send({ "record": response.record, "status": true });
+        }else{
+            return res.status(201).send({ "record": response.record, "status": false });
+        }
     });
 });
 

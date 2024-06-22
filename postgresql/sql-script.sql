@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS public.fx_person(
     oid bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( CYCLE INCREMENT 1 START 100001 MINVALUE 100001 MAXVALUE 9223372036854775807 CACHE 1 ),
     uid varchar(100) NOT NULL UNIQUE,
     dname varchar(100),
+    dprofile varchar(256),
     password varchar(128),
     logged_in boolean,
     status varchar(100),
