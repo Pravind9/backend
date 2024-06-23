@@ -9,7 +9,8 @@ const pool = new Pool({
     password: env.parsed.POSTGRESQL_DB_USER_PASS,
     host: env.parsed.POSTGRESQL_DB_HOST,
     port: env.parsed.POSTGRESQL_DB_PORT,
-    database: env.parsed.POSTGRESQL_DB_NAME
+    database: env.parsed.POSTGRESQL_DB_NAME,
+    ssl: true
 });
 
 pool.connect((error) => {
