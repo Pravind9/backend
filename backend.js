@@ -24,7 +24,7 @@ app.use(
 );
 
 
-//app.use(cors());
+app.use(cors());
 app.use(express.static(publicDir));
 app.use(express.urlencoded({ extended: 'false' }))
 app.use(express.json());
@@ -65,7 +65,7 @@ app.post("/api/user/register", (req, res) => {
         }
     }).catch(error => {
         console.log(error);
-        response.status(500).send(error);
+        res.status(500).send(error);
     });
 });
 
