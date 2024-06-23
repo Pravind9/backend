@@ -48,7 +48,7 @@ const getPerson = async (request) => {
 };
 
 const getLoggedInUsers = async (request) => {
-    console.log("get loggedIn user ", JSON.stringify(request.body));
+    console.log("get loggedIn user :: ", JSON.stringify(request.body));
     
     try {
         return await new Promise(function (resolve, reject) {
@@ -98,7 +98,7 @@ const toggleLoginStatus = async (request) => {
 }
 
 const createPerson = async (request) => {
-    console.log("request Body = ", JSON.stringify(request.body));
+    console.log("request Body create person :: ", JSON.stringify(request.body));
     const { uid, dname, password } = request.body;
     try {
 
@@ -125,7 +125,7 @@ const createPerson = async (request) => {
 };
 
 const createProfile = async (request) => {
-    console.log("request Body = ", JSON.stringify(request.body));
+    console.log("request Body for create profile :: ", JSON.stringify(request.body));
     const { uid, dname, fname, lname, phone, ptype } = request.body;
 
     try {

@@ -40,9 +40,8 @@ app.post("/api/user/update", apis.updateUser);
 app.post("/api/user/delete", apis.deleteUser);
 app.get("/api/user/get", apis.getUser);
 
-app.post("/api/user/register", (req, res) => {
-    console.log("Request data from register api :: ", req);
-    console.log("Request data from register api :: ", JSON.stringify(req.body));
+app.post("/api/user/register", (req, res) => {    
+    console.log("Request data for register user :: ", JSON.stringify(req.body));
     pgdb.getPerson(req).then(response => {
         console.log("response status = ", response.status);
         if (response.status === "REC") {
@@ -83,6 +82,7 @@ app.post("/api/user/logged", (req, res) => {
 });
 
 app.post("/api/user/login", (req, res) => {
+    console.log("Request data for login user :: ", JSON.stringify(req.body));
     const { password } = req.body;
     pgdb.getPerson(req).then(response => {
         if (response.status === "REC") {
@@ -117,7 +117,7 @@ app.post("/api/user/login", (req, res) => {
 });
 
 app.put("/api/user/logout", (req, res) => {
-    console.log("request Body = ", JSON.stringify(req.body));
+    console.log("request Body for logout user :: ", JSON.stringify(req.body));
     const { uid, status } = req.body;
     pgdb.toggleLoginStatus(req).then((response) => {
         console.log("response status = ", response);
