@@ -41,6 +41,8 @@ app.post("/api/user/delete", apis.deleteUser);
 app.get("/api/user/get", apis.getUser);
 
 app.post("/api/user/register", (req, res) => {
+    console.log("Request data from register api :: ", req);
+    console.log("Request data from register api :: ", JSON.stringify(req.body));
     pgdb.getPerson(req).then(response => {
         console.log("response status = ", response.status);
         if (response.status === "REC") {
